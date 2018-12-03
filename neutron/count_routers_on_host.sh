@@ -14,7 +14,7 @@ else
 fi
 
 for agent in ${AGENTS}; do
-    COUNT=$(neutron router-list-on-l3-agent --format csv --quote minimal ${agent} | grep -v "id,name,external_gateway_info" | grep "," | wc -l)
-    ROUTER_HOST=$(neutron agent-list --column id --column agent_type --column host --format csv --quote minimal | grep L3 | grep ${agent} | cut -f3 -d',' | tr -d '\r')
+    COUNT=$(neutron router-list-on-l3-agent -f value  ${agent} |wc -l)
+    ROUTER_HOST=$(openstack network agent show ${agent} -c host -f value)
     echo "${ROUTER_HOST} (${agent}): ${COUNT}"
 done

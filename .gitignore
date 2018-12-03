@@ -9,3 +9,4 @@
 */**/*.tfstate*
 .tox
 site.retry
+/lib/__pycache__/*
