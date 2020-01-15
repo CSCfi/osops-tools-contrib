@@ -53,7 +53,7 @@ def main():
     parser.add_argument('-f', '--from-l3agent', help='l3agent uuid', required=True)
     parser.add_argument('-t', '--to-l3agent', help='l3agent uuid', required=True)
     parser.add_argument('-r', '--router', help='specific router')
-    parser.add_argument('-s', '--sleep', help='sleep interval in seconds')
+    parser.add_argument('-s', '--sleep', type=int, help='sleep interval in seconds')
     parser.add_argument('-l', '--limit', help='max number of routers to migrate')
     parser.add_argument('-v', '--verbose', help='verbose', action='store_true')
     args = parser.parse_args()
