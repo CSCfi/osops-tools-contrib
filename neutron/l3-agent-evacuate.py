@@ -53,8 +53,8 @@ def main():
     parser.add_argument('-f', '--from-l3agent', help='l3agent uuid', required=True)
     parser.add_argument('-t', '--to-l3agent', help='l3agent uuid', required=True)
     parser.add_argument('-r', '--router', help='specific router')
-    parser.add_argument('-s', '--sleep', type=int, help='sleep interval in seconds')
-    parser.add_argument('-l', '--limit', help='max number of routers to migrate')
+    parser.add_argument('-s', '--sleep', default=10, type=int, help='sleep interval in seconds')
+    parser.add_argument('-l', '--limit', default=0, type=int, help='max number of routers to migrate')
     parser.add_argument('-v', '--verbose', help='verbose', action='store_true')
     args = parser.parse_args()
 
@@ -67,10 +67,7 @@ def main():
 
 
     api = openstackapi.OpenstackAPI(os_auth_url, os_username, os_password, os_project_name=os_tenant_name)
-    if args.limit:
-        limit=int(args.limit)
-    else:
-        limit = 0
+    limit = args.limit
 
     #Validate agent's UUID
     validateargs(api, os_region_name, args.from_l3agent, args.to_l3agent, args.router, args.sleep)
